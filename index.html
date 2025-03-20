@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kota & Plates Shop</title>
-    <!-- Font Awesome -->
+    <title>The Rely Fast Foods</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- AOS (Animate on Scroll) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Normalize.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
         :root {
@@ -21,27 +14,28 @@
             --accent-color: #f7c59f;
             --light-color: #f1f2eb;
             --dark-color: #1a1a1a;
+            --report-color: #28a745;
+            --card-bg: #ffe6d5;
+            --expense-color: #dc3545;
+            --profit-color: #28a745;
         }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
             background-color: var(--light-color);
             color: var(--dark-color);
             line-height: 1.6;
+            overflow: hidden; /* Prevents scrolling while loading */
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
         header {
             background-color: var(--primary-color);
             color: white;
@@ -49,88 +43,72 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
         nav {
             background-color: var(--secondary-color);
             padding: 10px 0;
         }
-        
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
         }
-        
         nav ul li {
             margin: 0 15px;
         }
-        
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
         nav ul li a:hover {
             color: var(--accent-color);
         }
-        
         .menu-section {
             padding: 30px 0;
         }
-        
         .menu-section h2 {
             text-align: center;
             color: var(--secondary-color);
             margin-bottom: 30px;
             font-size: 2rem;
         }
-        
         .menu-cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
-        
         .menu-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-        
         .menu-card:hover {
             transform: translateY(-5px);
         }
-        
         .card-header {
             background-color: var(--secondary-color);
             color: white;
             padding: 15px;
             text-align: center;
         }
-        
         .card-body {
             padding: 15px;
         }
-        
         .card-body ul {
             list-style: none;
             margin-bottom: 15px;
         }
-        
         .card-body ul li {
             margin-bottom: 5px;
         }
-        
         .price {
             font-weight: bold;
             color: var(--primary-color);
             font-size: 1.2rem;
         }
-        
         .order-btn {
             display: block;
             width: 100%;
@@ -144,11 +122,15 @@
             font-weight: 500;
             transition: background-color 0.3s ease;
         }
-        
         .order-btn:hover {
             background-color: #e85a24;
         }
-        
+        .report-btn {
+            background-color: var(--report-color);
+        }
+        .report-btn:hover {
+            background-color: #218838;
+        }
         footer {
             background-color: var(--secondary-color);
             color: white;
@@ -156,39 +138,49 @@
             padding: 20px 0;
             margin-top: 30px;
         }
-        
-        /* Admin Section Styles */
+        .contact-section {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .contact-section p {
+            margin: 10px 0;
+        }
+        .contact-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: 500;
+        }
+        .contact-btn:hover {
+            background-color: #e85a24;
+        }
         .admin-section {
             display: none;
             padding: 30px 0;
         }
-        
         .admin-form {
-            background-color: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
         }
-        
         .form-group {
             margin-bottom: 15px;
         }
-        
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
         }
-        
         .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        
         .submit-btn {
             background-color: var(--secondary-color);
             color: white;
@@ -198,12 +190,11 @@
             cursor: pointer;
             font-size: 1rem;
             font-weight: 500;
+            margin-right: 10px;
         }
-        
         .submit-btn:hover {
             background-color: #231f3a;
         }
-        
         .admin-toggle {
             position: fixed;
             bottom: 20px;
@@ -220,12 +211,10 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 100;
         }
-        
         .admin-toggle:hover {
             background-color: #231f3a;
         }
-
-        #login-modal {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -237,30 +226,96 @@
             justify-content: center;
             align-items: center;
         }
-        
         .modal-content {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 20px;
             border-radius: 10px;
-            width: 300px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
-        .close {
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        .modal-close {
             float: right;
             cursor: pointer;
             font-size: 1.5rem;
+            color: var(--dark-color);
         }
-        
+        .modal-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .modal-btn:hover {
+            background-color: #e85a24;
+        }
+        .financial-cards, .daily-sales-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .financial-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .financial-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        .financial-card p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .expense-text {
+            color: var(--expense-color);
+        }
+        .profit-text {
+            color: var(--profit-color);
+        }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid var(--light-color);
+            border-top: 6px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         @media (max-width: 768px) {
-            .menu-cards {
+            .menu-cards, .financial-cards, .daily-sales-cards {
                 grid-template-columns: 1fr;
             }
-            
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-            
             nav ul li {
                 margin: 5px 0;
             }
@@ -268,13 +323,15 @@
     </style>
 </head>
 <body>
-    <header class="animate__animated animate__fadeInDown">
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    <header>
         <div class="container">
-            <h1 id="typed-header">Kota & Plates Shop</h1>
+            <h1>The Rely Fast Foods</h1>
             <p>Delicious meals at great prices!</p>
         </div>
     </header>
-    
     <nav>
         <ul>
             <li><a href="#plates">Plates</a></li>
@@ -284,412 +341,42 @@
             <li><a href="#fish">Fish</a></li>
         </ul>
     </nav>
-    
     <main class="container">
-        <section id="plates" class="menu-section" data-aos="fade-up">
-            <h2>Plates</h2>
-            <div class="menu-cards">
-                <div class="menu-card" data-aos="zoom-in">
-                    <div class="card-header">
-                        <h3>Full Plate</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Pap</li>
-                            <li>Steak/Chicken/Mogodu/Stew Beef</li>
-                            <li>2 Sides</li>
-                        </ul>
-                        <p class="price">R80.00</p>
-                        <button class="order-btn" onclick="orderItem('Full Plate', 80.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-header">
-                        <h3>Half Plate</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Pap</li>
-                            <li>Steak/Chicken/Mogodu/Stew Beef</li>
-                            <li>2 Sides</li>
-                        </ul>
-                        <p class="price">R60.00</p>
-                        <button class="order-btn" onclick="orderItem('Half Plate', 60.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-header">
-                        <h3>Full Plate Malana le Maotwana</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Pap</li>
-                            <li>Malana le Maotwana</li>
-                        </ul>
-                        <p class="price">R70.00</p>
-                        <button class="order-btn" onclick="orderItem('Full Plate Malana le Maotwana', 70.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card-header">
-                        <h3>Half Plate Malana le Maotwana</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Pap</li>
-                            <li>Malana le Maotwana</li>
-                        </ul>
-                        <p class="price">R50.00</p>
-                        <button class="order-btn" onclick="orderItem('Half Plate Malana le Maotwana', 50.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="card-header">
-                        <h3>Sides Only</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Choose any side</li>
-                        </ul>
-                        <p class="price">R10.00</p>
-                        <button class="order-btn" onclick="orderItem('Sides Only', 10.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="card-header">
-                        <h3>Pap Only</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>Just Pap</li>
-                        </ul>
-                        <p class="price">R20.00</p>
-                        <button class="order-btn" onclick="orderItem('Pap Only', 20.00)">Order Now</button>
-                    </div>
-                </div>
-            </div>
+        <section class="contact-section">
+            <h2>Contact Us</h2>
+            <p>Order via WhatsApp or Call:</p>
+            <p>+27 71 241 8491</p>
+            <button class="contact-btn" onclick="showOrderModal('contact', '+27712418491')">WhatsApp</button>
+            <button class="contact-btn" onclick="callNumber('+27712418491')">Call</button>
+            <p>+27 74 698 8446</p>
+            <button class="contact-btn" onclick="showOrderModal('contact', '+27746988446')">WhatsApp</button>
+            <button class="contact-btn" onclick="callNumber('+27746988446')">Call</button>
         </section>
-        
-        <section id="kotas" class="menu-section" data-aos="fade-up">
-            <h2>Kotas</h2>
-            <div class="menu-cards">
-                <div class="menu-card" data-aos="zoom-in">
-                    <div class="card-header">
-                        <h3>Sedan</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R15.00</p>
-                        <button class="order-btn" onclick="orderItem('Sedan Kota', 15.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-header">
-                        <h3>Fiat</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Vienna</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R17.00</p>
-                        <button class="order-btn" onclick="orderItem('Fiat Kota', 17.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-header">
-                        <h3>Honda</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R20.00</p>
-                        <button class="order-btn" onclick="orderItem('Honda Kota', 20.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card-header">
-                        <h3>Hyundai</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Vienna</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R22.00</p>
-                        <button class="order-btn" onclick="orderItem('Hyundai Kota', 22.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="card-header">
-                        <h3>Audi</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Cheese</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R24.00</p>
-                        <button class="order-btn" onclick="orderItem('Audi Kota', 24.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="card-header">
-                        <h3>BMW</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Cheese</li>
-                            <li>Vienna</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R26.00</p>
-                        <button class="order-btn" onclick="orderItem('BMW Kota', 26.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="600">
-                    <div class="card-header">
-                        <h3>Dodge</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Double Cheese</li>
-                            <li>Vienna</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R30.00</p>
-                        <button class="order-btn" onclick="orderItem('Dodge Kota', 30.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="card-header">
-                        <h3>Ferrari</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Double Cheese</li>
-                            <li>Vienna</li>
-                            <li>Egg</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R35.00</p>
-                        <button class="order-btn" onclick="orderItem('Ferrari Kota', 35.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="800">
-                    <div class="card-header">
-                        <h3>Alfa Romeo</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Double Cheese</li>
-                            <li>Vienna</li>
-                            <li>Petty</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R40.00</p>
-                        <button class="order-btn" onclick="orderItem('Alfa Romeo Kota', 40.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="900">
-                    <div class="card-header">
-                        <h3>Jeep</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li>4 slices bread</li>
-                            <li>Polony</li>
-                            <li>Russian</li>
-                            <li>Double Cheese</li>
-                            <li>Vienna</li>
-                            <li>Egg</li>
-                            <li>Petty</li>
-                            <li>Chips</li>
-                            <li>Archer</li>
-                            <li>Lettuce</li>
-                        </ul>
-                        <p class="price">R45.00</p>
-                        <button class="order-btn" onclick="orderItem('Jeep Kota', 45.00)">Order Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="extras" class="menu-section" data-aos="fade-up">
-            <h2>Extras</h2>
-            <div class="menu-cards">
-                <div class="menu-card" data-aos="zoom-in">
-                    <div class="card-header">
-                        <h3>Russian</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R8.00</p>
-                        <button class="order-btn" onclick="orderItem('Russian', 8.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-header">
-                        <h3>Vienna</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R3.00</p>
-                        <button class="order-btn" onclick="orderItem('Vienna', 3.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-header">
-                        <h3>Polony</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R3.00</p>
-                        <button class="order-btn" onclick="orderItem('Polony', 3.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card-header">
-                        <h3>Cheese</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R5.00</p>
-                        <button class="order-btn" onclick="orderItem('Cheese', 5.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="card-header">
-                        <h3>Archer</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R10.00</p>
-                        <button class="order-btn" onclick="orderItem('Archer', 10.00)">Order Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="chips" class="menu-section" data-aos="fade-up">
-            <h2>Chips</h2>
-            <div class="menu-cards">
-                <div class="menu-card" data-aos="zoom-in">
-                    <div class="card-header">
-                        <h3>Small Chips</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R20.00</p>
-                        <button class="order-btn" onclick="orderItem('Small Chips', 20.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-header">
-                        <h3>Medium Chips</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R25.00</p>
-                        <button class="order-btn" onclick="orderItem('Medium Chips', 25.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-header">
-                        <h3>Large Chips</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R30.00</p>
-                        <button class="order-btn" onclick="orderItem('Large Chips', 30.00)">Order Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="fish" class="menu-section" data-aos="fade-up">
-            <h2>Fish</h2>
-            <div class="menu-cards">
-                <div class="menu-card" data-aos="zoom-in">
-                    <div class="card-header">
-                        <h3>Small Fish</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R20.00</p>
-                        <button class="order-btn" onclick="orderItem('Small Fish', 20.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-header">
-                        <h3>Medium Fish</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R30.00</p>
-                        <button class="order-btn" onclick="orderItem('Medium Fish', 30.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-header">
-                        <h3>Large Fish</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R40.00</p>
-                        <button class="order-btn" onclick="orderItem('Large Fish', 40.00)">Order Now</button>
-                    </div>
-                </div>
-                <div class="menu-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card-header">
-                        <h3>Fish and Chips</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="price">R40.00</p>
-                        <button class="order-btn" onclick="orderItem('Fish and Chips', 40.00)">Order Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="admin-section" class="admin-section" data-aos="fade-up">
-            <h2>Sales Reporting</h2>
+        <section id="plates" class="menu-section"><h2>Plates</h2><div class="menu-cards" id="plates-cards"></div></section>
+        <section id="kotas" class="menu-section"><h2>Kotas</h2><div class="menu-cards" id="kotas-cards"></div></section>
+        <section id="extras" class="menu-section"><h2>Extras</h2><div class="menu-cards" id="extras-cards"></div></section>
+        <section id="chips" class="menu-section"><h2>Chips</h2><div class="menu-cards" id="chips-cards"></div></section>
+        <section id="fish" class="menu-section"><h2>Fish</h2><div class="menu-cards" id="fish-cards"></div></section>
+        <section id="admin-section" class="admin-section">
+            <h2>Admin Dashboard</h2>
             <div class="admin-form">
+                <h3>Financial Overview - Today</h3>
+                <div class="financial-cards">
+                    <div class="financial-card"><h4>Total Sales</h4><p>R<span id="today-sales">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Orders</h4><p>R<span id="today-orders">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Revenue</h4><p>R<span id="today-revenue">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Expenditure</h4><p class="expense-text">R<span id="today-expenditure">0.00</span></p></div>
+                    <div class="financial-card"><h4>Net Total</h4><p id="today-net" class="profit-text">R<span id="today-net-value">0.00</span></p></div>
+                </div>
+                <h3>Financial Overview - All Time</h3>
+                <div class="financial-cards">
+                    <div class="financial-card"><h4>Total Sales</h4><p>R<span id="all-sales">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Orders</h4><p>R<span id="all-orders">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Revenue</h4><p>R<span id="all-revenue">0.00</span></p></div>
+                    <div class="financial-card"><h4>Total Expenditure</h4><p class="expense-text">R<span id="all-expenditure">0.00</span></p></div>
+                    <div class="financial-card"><h4>Net Total</h4><p id="all-net" class="profit-text">R<span id="all-net-value">0.00</span></p></div>
+                </div>
+                <h3>Sales Reporting</h3>
                 <div class="form-group">
                     <label for="item-select">Item</label>
                     <select id="item-select"></select>
@@ -703,167 +390,405 @@
                     <input type="text" id="customer-name">
                 </div>
                 <button class="submit-btn" onclick="recordSale()">Record Sale</button>
-                <div id="sales-summary" style="margin-top: 20px;">
-                    <h3>Today's Sales Summary</h3>
-                    <p>Total Sales: R<span id="total-sales">0.00</span></p>
-                    <p>Total Items Sold: <span id="total-items">0</span></p>
+                <button class="submit-btn" onclick="downloadSalesCSV()">Download Sales CSV</button>
+                <h3>Daily Sales Summary</h3>
+                <div class="daily-sales-cards" id="daily-sales-cards"></div>
+                <h3>Record Expenditure</h3>
+                <div class="form-group">
+                    <label for="expense-desc">Description</label>
+                    <input type="text" id="expense-desc" placeholder="e.g., Ingredients">
                 </div>
+                <div class="form-group">
+                    <label for="expense-amount">Amount (R)</label>
+                    <input type="number" id="expense-amount" min="0" step="0.01" value="0.00">
+                </div>
+                <button class="submit-btn" onclick="recordExpenditure()">Record Expenditure</button>
             </div>
         </section>
     </main>
-    
     <div class="admin-toggle" onclick="showLoginModal()">
         <i class="fas fa-user-lock"></i>
     </div>
-    
-    <div id="login-modal">
-        <div class="modal-content animate__animated animate__zoomIn">
-            <span class="close" onclick="closeLoginModal()">×</span>
-            <h2>Admin Login</h2>
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeLoginModal()">×</span>
+            <h3>Admin Login</h3>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password">
             </div>
-            <button class="submit-btn" onclick="login()">Login</button>
+            <button class="modal-btn" onclick="login()">Login</button>
         </div>
     </div>
-    
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeOrderModal()">×</span>
+            <h3 id="modal-title"></h3>
+            <div id="modal-body"></div>
+            <button class="modal-btn" id="modal-submit"></button>
+        </div>
+    </div>
     <footer>
-        <p>© 2025 Kota & Plates Shop. All rights reserved.</p>
+        <p>© 2025 The Rely Fast Foods (Pty) Ltd. All rights reserved.</p>
     </footer>
-    
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init();
-
-        // Typed.js for header
-        new Typed('#typed-header', {
-            strings: ['Kota & Plates Shop', 'Your Favorite Meal Spot'],
-            typeSpeed: 50,
-            backSpeed: 30,
-            loop: true
-        });
-
-        // GSAP animation for nav
-        gsap.from('nav ul li', { opacity: 0, y: -20, stagger: 0.2, duration: 1 });
-
-        // Menu items data
-        const menuItems = [
-            { name: 'Full Plate', price: 80.00, category: 'Plates' },
-            { name: 'Half Plate', price: 60.00, category: 'Plates' },
-            { name: 'Full Plate Malana le Maotwana', price: 70.00, category: 'Plates' },
-            { name: 'Half Plate Malana le Maotwana', price: 50.00, category: 'Plates' },
-            { name: 'Sides Only', price: 10.00, category: 'Plates' },
-            { name: 'Pap Only', price: 20.00, category: 'Plates' },
-            { name: 'Sedan Kota', price: 15.00, category: 'Kotas' },
-            { name: 'Fiat Kota', price: 17.00, category: 'Kotas' },
-            { name: 'Honda Kota', price: 20.00, category: 'Kotas' },
-            { name: 'Hyundai Kota', price: 22.00, category: 'Kotas' },
-            { name: 'Audi Kota', price: 24.00, category: 'Kotas' },
-            { name: 'BMW Kota', price: 26.00, category: 'Kotas' },
-            { name: 'Dodge Kota', price: 30.00, category: 'Kotas' },
-            { name: 'Ferrari Kota', price: 35.00, category: 'Kotas' },
-            { name: 'Alfa Romeo Kota', price: 40.00, category: 'Kotas' },
-            { name: 'Jeep Kota', price: 45.00, category: 'Kotas' },
-            { name: 'Russian', price: 8.00, category: 'Extras' },
-            { name: 'Vienna', price: 3.00, category: 'Extras' },
-            { name: 'Polony', price: 3.00, category: 'Extras' },
-            { name: 'Cheese', price: 5.00, category: 'Extras' },
-            { name: 'Archer', price: 10.00, category: 'Extras' },
-            { name: 'Small Chips', price: 20.00, category: 'Chips' },
-            { name: 'Medium Chips', price: 25.00, category: 'Chips' },
-            { name: 'Large Chips', price: 30.00, category: 'Chips' },
-            { name: 'Small Fish', price: 20.00, category: 'Fish' },
-            { name: 'Medium Fish', price: 30.00, category: 'Fish' },
-            { name: 'Large Fish', price: 40.00, category: 'Fish' },
-            { name: 'Fish and Chips', price: 40.00, category: 'Fish' }
-        ];
-
-        // Sales data
+        let menuData = {};
         let salesData = JSON.parse(localStorage.getItem('salesData')) || [];
+        let isAdminLoggedIn = false;
+        const contactNumbers = ['+27712418491', '+27746988446'];
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGo8wq0Vt6oewDH8NUx9UuOVk5efZEgi4KPAxBlLVGAsEfpqar-m3stD7K7osLgJ8t5A/exec';
 
-        // WhatsApp number
-        const whatsappNumber = '+27810135115';
-
-        // Populate item select dropdown
-        const itemSelect = document.getElementById('item-select');
-        menuItems.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.name;
-            option.textContent = `${item.name} - R${item.price.toFixed(2)}`;
-            itemSelect.appendChild(option);
-        });
-
-        // Order function
-        function orderItem(itemName, price) {
-            const quantity = prompt(`How many ${itemName}s would you like to order?`, '1');
-            if (quantity && !isNaN(quantity) && quantity > 0) {
-                const total = price * quantity;
-                const message = `Order: ${quantity} x ${itemName} = R${total.toFixed(2)}`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            }
+        function showLoading() {
+            document.getElementById('loading-screen').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
-        // Show login modal
+        function hideLoading() {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function fetchMenuAndInitialize() {
+            showLoading();
+            fetch(WEB_APP_URL)
+                .then(response => response.json())
+                .then(data => {
+                    menuData = data.menu;
+                    populateMenu();
+                    populateItemSelect();
+                    updateDashboard();
+                    hideLoading();
+                })
+                .catch(error => {
+                    console.error('Error fetching menu:', error);
+                    hideLoading();
+                    alert('Failed to load menu. Please try again later.');
+                });
+        }
+
+        function populateMenu() {
+            const sections = [
+                { id: 'plates-cards', data: menuData.plates },
+                { id: 'kotas-cards', data: menuData.kotas },
+                { id: 'extras-cards', data: menuData.extras },
+                { id: 'chips-cards', data: menuData.chips },
+                { id: 'fish-cards', data: menuData.fish }
+            ];
+            sections.forEach(section => {
+                const container = document.getElementById(section.id);
+                container.innerHTML = section.data.map(item => {
+                    const descriptionLines = item.description ? item.description.split(',').map(line => line.trim()) : [''];//no desctiption
+                    const descriptionList = descriptionLines.map(line => `<li>${line}</li>`).join('');
+                    return `
+                        <div class="menu-card">
+                            <div class="card-header"><h3>${item.name}</h3></div>
+                            <div class="card-body">
+                                <ul>${descriptionList}</ul>
+                                <p class="price">R${item.price.toFixed(2)}</p>
+                                <button class="order-btn" onclick="showOrderModal('item', '${item.name}', ${item.price}, '${item.description}')">Order Now</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            });
+        }
+
+        function populateItemSelect() {
+            const itemSelect = document.getElementById('item-select');
+            const allItems = [
+                ...menuData.plates, ...menuData.kotas, ...menuData.extras, 
+                ...menuData.chips, ...menuData.fish
+            ];
+            allItems.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = `${item.name} - R${item.price.toFixed(2)}`;
+                itemSelect.appendChild(option);
+            });
+        }
+
         function showLoginModal() {
             document.getElementById('login-modal').style.display = 'flex';
         }
 
-        // Close login modal
         function closeLoginModal() {
             document.getElementById('login-modal').style.display = 'none';
         }
 
-        // Admin login (simple password check)
+        function showOrderModal(type, param1, param2, param3) {
+            const modal = document.getElementById('order-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const submitBtn = document.getElementById('modal-submit');
+
+            if (type === 'item') {
+                const itemName = param1;
+                const price = param2;
+                const description = param3 || '';
+                const extrasOptions = menuData.extras.map(extra => 
+                    `<option value="${extra.name}" data-price="${extra.price}">${extra.name} - R${extra.price.toFixed(2)}</option>`
+                ).join('');
+                if (isAdminLoggedIn) {
+                    title.textContent = `Report Sale: ${itemName}`;
+                    body.innerHTML = `
+                        <div class="form-group">
+                            <label for="modal-quantity">How many ${itemName}s were sold?</label>
+                            <input type="number" id="modal-quantity" min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-extras">Add Extras (Optional)</label>
+                            <select id="modal-extras" multiple>${extrasOptions}</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-customer">Customer Name (Optional)</label>
+                            <input type="text" id="modal-customer">
+                        </div>
+                    `;
+                    submitBtn.textContent = 'Submit Report';
+                    submitBtn.onclick = () => {
+                        const quantity = parseInt(document.getElementById('modal-quantity').value);
+                        const extras = Array.from(document.getElementById('modal-extras').selectedOptions);
+                        const customer = document.getElementById('modal-customer').value || 'Anonymous';
+                        if (quantity && !isNaN(quantity) && quantity > 0) {
+                            const baseTotal = price * quantity;
+                            const extrasTotal = extras.reduce((sum, extra) => sum + parseFloat(extra.dataset.price) * quantity, 0);
+                            const total = baseTotal + extrasTotal;
+                            const itemWithExtras = `${itemName}${extras.length ? ' + ' + extras.map(e => e.value).join(', ') : ''}`;
+                            recordSaleToSheet(itemWithExtras, quantity, total, customer);
+                            alert(`Reported: ${quantity} x ${itemWithExtras} = R${total.toFixed(2)}`);
+                            closeOrderModal();
+                        }
+                    };
+                } else {
+                    title.textContent = `Order: ${itemName}`;
+                    body.innerHTML = `
+                        <div class="form-group">
+                            <label for="modal-quantity">How many ${itemName}s would you like?</label>
+                            <input type="number" id="modal-quantity" min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-extras">Add Extras (Optional)</label>
+                            <select id="modal-extras" multiple>${extrasOptions}</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-customer">Your Name (Optional)</label>
+                            <input type="text" id="modal-customer">
+                        </div>
+                    `;
+                    submitBtn.textContent = 'Place Order';
+                    submitBtn.onclick = () => {
+                        const quantity = parseInt(document.getElementById('modal-quantity').value);
+                        const extras = Array.from(document.getElementById('modal-extras').selectedOptions);
+                        const customer = document.getElementById('modal-customer').value || 'Anonymous';
+                        if (quantity && !isNaN(quantity) && quantity > 0) {
+                            const baseTotal = price * quantity;
+                            const extrasTotal = extras.reduce((sum, extra) => sum + parseFloat(extra.dataset.price) * quantity, 0);
+                            const total = baseTotal + extrasTotal;
+                            const itemWithExtras = `${itemName}${extras.length ? ' + ' + extras.map(e => e.value).join(', ') : ''}`;
+                            const descriptionLines = description.split(',').map(line => line.trim()).join('\n');
+                            const extrasDesc = extras.length ? '\nExtras: ' + extras.map(e => menuData.extras.find(ex => ex.name === e.value).description).join(', ') : '';
+                            const message = `Order: ${quantity} x ${itemWithExtras}\nDescription: ${descriptionLines}${extrasDesc}\nTotal: R${total.toFixed(2)}\nBy: ${customer}`;
+                            const whatsappUrl = `https://wa.me/${contactNumbers[0]}?text=${encodeURIComponent(message)}`;
+                            recordOrderToSheet(itemWithExtras, quantity, total, customer);
+                            window.open(whatsappUrl, '_blank');
+                            closeOrderModal();
+                        }
+                    };
+                }
+            } else if (type === 'contact') {
+                const number = param1;
+                title.textContent = 'Order via WhatsApp';
+                body.innerHTML = `
+                    <div class="form-group">
+                        <label for="modal-item">What would you like to order?</label>
+                        <input type="text" id="modal-item">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-quantity">How many would you like?</label>
+                        <input type="number" id="modal-quantity" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-customer">Your Name (Optional)</label>
+                        <input type="text" id="modal-customer">
+                    </div>
+                `;
+                submitBtn.textContent = 'Send Order';
+                submitBtn.onclick = () => {
+                    const item = document.getElementById('modal-item').value;
+                    const quantity = document.getElementById('modal-quantity').value;
+                    const customer = document.getElementById('modal-customer').value || 'Anonymous';
+                    if (item && quantity && !isNaN(quantity) && quantity > 0) {
+                        const allItems = [...menuData.plates, ...menuData.kotas, ...menuData.extras, ...menuData.chips, ...menuData.fish];
+                        const foundItem = allItems.find(i => i.name === item);
+                        const price = foundItem ? foundItem.price : 0;
+                        const description = foundItem ? foundItem.description : '';//no description
+                        const total = price * quantity;
+                        const descriptionLines = description.split(',').map(line => line.trim()).join('\n');
+                        const message = `Order: ${quantity} x ${item}\nDescription: ${descriptionLines}\nTotal: R${total.toFixed(2)}\nBy: ${customer}`;
+                        const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+                        recordOrderToSheet(item, quantity, total, customer);
+                        window.open(whatsappUrl, '_blank');
+                        closeOrderModal();
+                    }
+                };
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('order-modal').style.display = 'none';
+        }
+
+        function callNumber(number) {
+            window.location.href = `tel:${number}`;
+        }
+
         function login() {
             const password = document.getElementById('password').value;
-            if (password === 'admin123') { // Password: admin123
+            if (password === 'therelyadmin123') {
+                isAdminLoggedIn = true;
                 document.getElementById('login-modal').style.display = 'none';
                 document.getElementById('admin-section').style.display = 'block';
-                updateSalesSummary();
+                updateDashboard();
+                updateButtonsToReport();
             } else {
                 alert('Incorrect password');
             }
         }
 
-        // Record sale
+        function updateButtonsToReport() {
+            const buttons = document.querySelectorAll('.order-btn');
+            buttons.forEach(button => {
+                button.textContent = 'Report';
+                button.classList.add('report-btn');
+            });
+        }
+
         function recordSale() {
             const itemName = document.getElementById('item-select').value;
-            const quantity = parseInt(document.getElementById('quantity').value);
-            const customerName = document.getElementById('customer-name').value || 'Anonymous';
-            const item = menuItems.find(i => i.name === itemName);
-            const total = item.price * quantity;
-
-            const sale = {
-                item: itemName,
-                quantity: quantity,
-                total: total,
-                customer: customerName,
-                date: new Date().toISOString()
-            };
-
-            salesData.push(sale);
-            localStorage.setItem('salesData', JSON.stringify(salesData));
-            updateSalesSummary();
-            alert(`Sale recorded: ${quantity} x ${itemName} = R${total.toFixed(2)}`);
+            const quantity = document.getElementById('quantity').value;
+            const customer = document.getElementById('customer-name').value || 'Anonymous';
+            const allItems = [...menuData.plates, ...menuData.kotas, ...menuData.extras, ...menuData.chips, ...menuData.fish];
+            const price = allItems.find(i => i.name === itemName).price;
+            const total = price * quantity;
+            recordSaleToSheet(itemName, quantity, total, customer);
+            alert(`Recorded: ${quantity} x ${itemName} = R${total.toFixed(2)}`);
         }
 
-        // Update sales summary
-        function updateSalesSummary() {
-            const today = new Date().toISOString().split('T')[0];
-            const todaySales = salesData.filter(sale => sale.date.startsWith(today));
-            const totalSales = todaySales.reduce((sum, sale) => sum + sale.total, 0);
-            const totalItems = todaySales.reduce((sum, sale) => sum + sale.quantity, 0);
-
-            document.getElementById('total-sales').textContent = totalSales.toFixed(2);
-            document.getElementById('total-items').textContent = totalItems;
+        function recordSaleToSheet(itemName, quantity, total, customer) {
+            const sastOffset = 2 * 60 * 60 * 1000;
+            const now = new Date(Date.now() + sastOffset);
+            const date = now.toISOString().split('T')[0];
+            const time = now.toISOString().split('T')[1].split('.')[0];
+            const sale = { date, time, item: itemName, quantity: parseInt(quantity), total, customer };
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify({ type: 'sale', data: sale }),
+                headers: { 'Content-Type': 'application/json' },
+                mode: 'no-cors'
+            }).then(() => {
+                salesData.push(sale);
+                localStorage.setItem('salesData', JSON.stringify(salesData));
+                updateDashboard();
+            }).catch(error => console.error('Error:', error));
         }
+
+        function recordOrderToSheet(itemName, quantity, total, customer) {
+            const sastOffset = 2 * 60 * 60 * 1000;
+            const now = new Date(Date.now() + sastOffset);
+            const date = now.toISOString().split('T')[0];
+            const time = now.toISOString().split('T')[1].split('.')[0];
+            const order = { date, time, item: itemName, quantity: parseInt(quantity), total, customer };
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify({ type: 'order', data: order }),
+                headers: { 'Content-Type': 'application/json' },
+                mode: 'no-cors'
+            }).then(() => updateDashboard()).catch(error => console.error('Error:', error));
+        }
+
+        function recordExpenditure() {
+            const desc = document.getElementById('expense-desc').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            if (desc && !isNaN(amount) && amount > 0) {
+                const sastOffset = 2 * 60 * 60 * 1000;
+                const now = new Date(Date.now() + sastOffset);
+                const date = now.toISOString().split('T')[0];
+                const time = now.toISOString().split('T')[1].split('.')[0];
+                const expenditure = { date, time, description: desc, amount };
+                fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ type: 'expenditure', data: expenditure }),
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'no-cors'
+                }).then(() => {
+                    alert(`Expenditure Recorded: R${amount.toFixed(2)} on ${desc}`);
+                    updateDashboard();
+                }).catch(error => console.error('Error:', error));
+            } else {
+                alert('Please enter a valid description and amount.');
+            }
+        }
+
+        function updateDashboard() {
+            fetch(WEB_APP_URL)
+                .then(response => response.json())
+                .then(data => {
+                    const today = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const todaySales = salesData.filter(sale => sale.date === today).reduce((sum, sale) => sum + sale.total, 0);
+                    const todayOrders = 0; // Orders not tracked locally
+                    const todayRevenue = todaySales + todayOrders;
+                    const todayExpenditure = 0; // Expenditure not tracked locally
+                    const todayNet = todayRevenue - todayExpenditure;
+
+                    document.getElementById('today-sales').textContent = todaySales.toFixed(2);
+                    document.getElementById('today-orders').textContent = todayOrders.toFixed(2);
+                    document.getElementById('today-revenue').textContent = todayRevenue.toFixed(2);
+                    document.getElementById('today-expenditure').textContent = todayExpenditure.toFixed(2);
+                    document.getElementById('today-net-value').textContent = todayNet.toFixed(2);
+                    document.getElementById('today-net').className = todayNet >= 0 ? 'profit-text' : 'expense-text';
+
+                    document.getElementById('all-sales').textContent = data.salesTotal.toFixed(2);
+                    document.getElementById('all-orders').textContent = data.ordersTotal.toFixed(2);
+                    document.getElementById('all-revenue').textContent = data.totalRevenue.toFixed(2);
+                    document.getElementById('all-expenditure').textContent = data.expenditureTotal.toFixed(2);
+                    document.getElementById('all-net-value').textContent = data.netTotal.toFixed(2);
+                    document.getElementById('all-net').className = data.netTotal >= 0 ? 'profit-text' : 'expense-text';
+
+                    const dailySalesCards = document.getElementById('daily-sales-cards');
+                    dailySalesCards.innerHTML = Object.entries(data.dailySales)
+                        .map(([date, { total, items }]) => `
+                            <div class="financial-card">
+                                <h4>${date}</h4>
+                                <p>Total Sales: R${total.toFixed(2)}</p>
+                                <p>Items Sold: ${items}</p>
+                            </div>
+                        `).join('');
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function downloadSalesCSV() {
+            const headers = ['Date', 'Time', 'Item Name', 'Quantity', 'Total (R)', 'Customer Name'];
+            const rows = salesData.map(sale => [
+                sale.date,
+                sale.time,
+                sale.item,
+                sale.quantity,
+                sale.total.toFixed(2),
+                sale.customer
+            ]);
+            const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sales_data.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        fetchMenuAndInitialize();
     </script>
 </body>
 </html>
